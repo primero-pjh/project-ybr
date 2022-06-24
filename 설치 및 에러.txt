@@ -1,0 +1,22 @@
+# npx init project_ybr 하니까 cli.init not function 에러
+> npx init project_ybr --version 0.68.2
+> 로 해결
+
+# CSS Framework는 React Native Elements 사용
+> https://reactnativeelements.com/
+
+# React Native Elements 사용법
+> npm i react-native-elements --save
+> npm i --save react-native-vector-icons
+npm install @types/react-redux 
+react-redux 
+redux 
+redux-devtools-extension 
+redux-logger 
+redux-promise-middleware 
+redux-thunk 
+redux-logger 
+@types/redux-logger
+
+# RNSScreens 에러 나면 npm install react-native-screens react-native-safe-area-context
+해보셈
