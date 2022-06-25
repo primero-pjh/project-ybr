@@ -7,9 +7,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import Count from './src/components/count'
-import { Button, Card, Input, Switch } from 'react-native-elements';
+import { Button, Card, Input, Switch, Overlay } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { io } from "socket.io-client";
+const socket = io("ws://110.46.100.19:8080");
+socket.on("Connection", function(data) {
+  console.log("data:", data);
+});
 //AsyncStorage setItem
 const storeData = async (value) => {
   try {
@@ -65,10 +69,11 @@ function HomeStackScreen() {
 }
 
 function LoginScreen({ navigation }) {
-  const [switchValue, setSwitchValue] = useState(false);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [code, setCode] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [autoLogin, setSwitchValue] = useState(false);
   return (
     <View style={{ flex: 1, justifyContent: 'center', width: '100%' }}>
       <Card>
@@ -83,9 +88,12 @@ function LoginScreen({ navigation }) {
         <Card.Divider />
         <View style={{flexDirection:'row', flexWrap:'wrap', alignItems: "center", paddingBottom: 15}}>
           <Text style={{color: 'black', paddingRight: 10, paddingLeft: 5}}>자동로그인</Text>
-          <Switch value={switchValue} label="hi" onValueChange={setSwitchValue} />
+          <Switch value={autoLogin} label="hi" onValueChange={setSwitchValue} />
         </View>
         <Button title="로그인" onPress={ () => handleLogin() }/>
+        <Overlay isVisible={visible} fullScreen={true}>
+          <Text>Hello from Overlay!</Text>
+        </Overlay>
       </Card>
     </View>
   );
@@ -93,7 +101,16 @@ function LoginScreen({ navigation }) {
     console.log("id:", id);
     console.log("pw:", pw);
     console.log("code:", code);
-    console.log("switchValue:", switchValue);
+    console.log("autoLogin:", autoLogin);
+    setVisible(true);
+    socket.emit("/api/user/login", {
+      id: id,
+      pw: pw,
+      code: code,
+      autoLogin: autoLogin
+    }, (response) => {
+      console.log("response;", response);
+    });
   }
 }
 
