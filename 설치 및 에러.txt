@@ -18,5 +18,16 @@ redux-thunk
 redux-logger 
 @types/redux-logger
 
-# RNSScreens 에러 나면 npm install react-native-screens react-native-safe-area-context
-해보셈
+# RNSScreens 에러 나면 
+> npm install react-native-screens react-native-safe-area-context
+> npm remove react-native-screens react-native-safe-area-context
+
+# JAVA 환경변수 설정
+> https://inhwanlee.tistory.com/m/entry/JDK%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EC%84%A4%EC%A0%95
+
+# Cookie
+npm install @react-native-cookies/cookies
+> https://github.com/react-native-cookies/cookies
+에서 AsyncStorage 로 변경
+> npm install @react-native-async-storage/async-storage
+> https://react-native-async-storage.github.io/async-storage/docs/install/
