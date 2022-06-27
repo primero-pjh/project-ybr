@@ -7,13 +7,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import Count from './src/components/count'
+import ChatPage from './src/components/chat/chat'
 import { Button, Card, Input, Switch, Overlay } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { io } from "socket.io-client";
-const socket = io("ws://110.46.100.19:8080");
-socket.on("Connection", function(data) {
-  console.log("data:", data);
-});
+// import { io } from "socket.io-client";
+// const socket = io("ws://110.46.100.19:8080");
+// socket.on("Connection", function(data) {
+//   console.log("data:", data);
+// });
 //AsyncStorage setItem
 const storeData = async (value) => {
   try {
@@ -63,6 +64,7 @@ function HomeStackScreen() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Chat" component={ChatPage} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
@@ -102,15 +104,16 @@ function LoginScreen({ navigation }) {
     console.log("pw:", pw);
     console.log("code:", code);
     console.log("autoLogin:", autoLogin);
-    setVisible(true);
-    socket.emit("/api/user/login", {
-      id: id,
-      pw: pw,
-      code: code,
-      autoLogin: autoLogin
-    }, (response) => {
-      console.log("response;", response);
-    });
+    // setVisible(true);
+    navigation.navigate('HomeStack');
+    // socket.emit("/api/user/login", {
+    //   id: id,
+    //   pw: pw,
+    //   code: code,
+    //   autoLogin: autoLogin
+    // }, (response) => {
+    //   console.log("response;", response);
+    // });
   }
 }
 
