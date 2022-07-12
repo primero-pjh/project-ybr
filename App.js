@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //AsyncStorage setItem
 const storeData = async (value) => {
   try {
+    console.log("?");
     await AsyncStorage.setItem('@storage_Key', value);
     getData();
   } catch (e) {
